@@ -19,6 +19,11 @@ public class Solution {
     }};
 
     public int romanToInt(String s) {
+        return sol1(s);
+    }
+
+    public int sol1(String s) {
+
         char[] romanNums = s.toCharArray();
         List<Integer> decNums = new ArrayList<Integer>();
         for(char rom : romanNums) {
@@ -54,4 +59,27 @@ public class Solution {
         return sum;
     }
 
+    public int sol2(String s){
+        int current = 0;
+        int next = 0;
+        int sum = 0;
+
+        for(int i=0; i<s.length(); i++){
+            if(i!=s.length()-1) {
+                current = romanMap.get(s.charAt(i));
+                System.out.println(current);
+                next = romanMap.get(s.charAt(i + 1));
+                if (current < next) {
+                    sum += next - current;
+                    i+=1;
+                } else {
+                    sum += current;
+                }
+            }
+            else{
+                sum += romanMap.get(s.charAt(i));
+            }
+        }
+        return sum;
+    }
 }
